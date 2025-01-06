@@ -1,0 +1,341 @@
+.container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 252, 245, 0.95);
+  padding: 20px;
+}
+
+.count-display {
+  font-size: 28px;
+  font-weight: 600;
+  color: #D4AF37;
+  text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0 0 40px 0;
+  order: 1;
+}
+
+.woodfish-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  margin: 0;
+  order: 2;
+}
+
+.woodfish {
+  width: 240px;
+  height: 240px;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.woodfish.hit {
+  transform: scale(0.92);
+}
+
+/* 点击波纹特效 */
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 215, 0, 0) 70%);
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleEffect 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes rippleEffect {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    background: rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(20);
+    opacity: 0;
+    background: rgba(255, 215, 0, 0);
+  }
+}
+
+/* 功德文字特效 */
+.hit-effect {
+  position: absolute;
+  color: #FFD700;
+  font-weight: 600;
+  font-size: 24px;
+  animation: floatUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.9);
+  }
+}
+
+/* 佛光特效 */
+.buddha-light {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0) 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.buddha-light.show {
+  opacity: 1;
+}
+
+.light-text {
+  font-size: 40px;
+  color: #FFD700;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+  font-weight: 600;
+}
+
+/* 许愿表单 */
+.wish-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 252, 245, 0.98);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 10000;
+}
+
+.wish-form.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wish-title {
+  font-size: 30px;
+  font-weight: 600;
+  color: #D4AF37;
+  text-shadow: 0 2px 15px rgba(212, 175, 55, 0.4);
+  text-align: center;
+  margin: 100px 0 20px;
+  padding: 0 20px;
+}
+
+.wish-item {
+  flex: 1;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wish-label {
+  font-size: 20px;
+  color: #8B4513;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.image-upload {
+  flex: 1;
+  width: 100%;
+  min-height: 300px;
+  border-radius: 20px;
+  background: rgba(255, 248, 220, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.image-upload image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f5f5f7;
+}
+
+.upload-placeholder {
+  color: #8B4513;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.wish-input-container {
+  flex: none;
+  margin-bottom: 20px;
+}
+
+.wish-input {
+  width: calc(100% - 0px);
+  box-sizing: border-box;
+  height: 50px;
+  background: rgba(255, 248, 220, 0.5);
+  border-radius: 20px;
+  padding: 0 20px;
+  font-size: 18px;
+  color: #8B4513;
+  line-height: 50px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.wish-input::placeholder {
+  line-height: 50px;
+  color: rgba(139, 69, 19, 0.6);
+}
+
+.wish-button {
+  background: linear-gradient(145deg, #D4AF37, #FFD700);
+  color: #8B4513;
+  border: none;
+  border-radius: 20px;
+  height: 60px;
+  font-size: 22px;
+  font-weight: 600;
+  width: 100%;
+  margin: 20px 0 calc(env(safe-area-inset-bottom) + 20px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+}
+
+.wish-button:active {
+  background: linear-gradient(145deg, #FFD700, #D4AF37);
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.woodfish-wrapper.disabled {
+  opacity: 0.8;
+  filter: saturate(0.8);
+}
+
+/* 添加点击时的中心光点特效 */
+.woodfish-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 215, 0, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.woodfish-wrapper.hitting::after {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* 修改中心光点特效 */
+.center-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0.6) 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.center-dot.active {
+  animation: dotPulse 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dotPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0);
+  }
+}
+
+/* 添加返回按钮样式 */
+.back-button {
+  position: absolute;
+  top: 52px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.back-arrow {
+  width: 12px;
+  height: 12px;
+  border-left: 3px solid #8B4513;
+  border-bottom: 3px solid #8B4513;
+  transform: rotate(45deg);
+  margin-left: 8px;
+}
+
+.back-button:active .back-arrow {
+  opacity: 0.6;
+}
+
+/* 修改内容区域布局 */
+.wish-content {
+  flex: 1;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

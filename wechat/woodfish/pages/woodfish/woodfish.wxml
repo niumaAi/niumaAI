@@ -1,0 +1,56 @@
+<view class="container">
+    <view class="count-display">功德: {{hitCount}}</view>
+
+  <view class="woodfish-wrapper {{!isClickable ? 'disabled' : ''}}" bindtap="onWoodfishClick">
+    <image class="woodfish {{isHitting ? 'hit' : ''}}" 
+           src="/static/images/muyu.png" 
+           mode="aspectFit"/>
+    <view class="center-dot {{isHitting ? 'active' : ''}}"></view>
+    <block wx:for="{{hitEffects}}" wx:key="id">
+      <view class="hit-effect" 
+            style="left: {{item.x}}px; top: {{item.y}}px; transform: rotate({{item.rotate}}deg)">
+        {{item.text}}
+      </view>
+    </block>
+    <block wx:for="{{ripples}}" wx:key="id">
+      <view class="ripple"></view>
+    </block>
+  </view>
+</view>
+
+<!-- 佛光特效 -->
+<view class="buddha-light {{showBuddhaLight ? 'show' : ''}}">
+  <view class="light-text">功德圆满</view>
+</view>
+
+<!-- 许愿表单 -->
+<view class="wish-form {{showWishForm ? 'show' : ''}}">
+  <view class="back-button" bindtap="closeWishForm">
+    <view class="back-arrow"></view>
+  </view>
+
+  <view class="wish-title">佛祖保佑，许一个愿吧</view>
+  
+  <view class="wish-content">
+    <view class="wish-item">
+      <view class="wish-label">许愿对象：</view>
+      <view class="image-upload" bindtap="chooseImage">
+        <image wx:if="{{wishImage}}" src="{{wishImage}}" mode="aspectFit"></image>
+        <view wx:else class="upload-placeholder">
+          <text style="font-size: 14px; color: #8B4513;">支持从相册选择或拍照</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="wish-item wish-input-container">
+      <view class="wish-label">许愿内容：</view>
+      <input class="wish-input" 
+             maxlength="20" 
+             placeholder="请输入愿望(20字以内)"
+             value="{{wishContent}}"
+             bindinput="inputWishContent"/>
+    </view>
+    
+    <button class="wish-button" bindtap="submitWish">许愿</button>
+  </view>
+</view>
